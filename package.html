@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>套餐</title>
+	</head>
+	<style type="text/css">
+		html {
+			font-size: 31.25%;
+		}
+	.noscroll,.noscroll body {
+    overflow: hidden;
+}
+.noscroll body {
+    position: relative;
+}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			margin: 0;
+			padding: 0;
+			background-image: url(img/bg.png);
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+		}
+		
+		.box {
+			width: 90%;
+			margin: 0 auto;
+		}
+
+		.package_box {
+			margin-left: 20px;
+			margin-right: 20px;
+			box-sizing: border-box;
+			position: relative;
+			margin: 1rem 0;
+			border-radius: 0.5rem;
+			background-color: #fff4e7;
+		}
+
+		.title{
+			position: absolute;
+			top: 0;
+			left: 0;
+	      width: 27%;
+	      height: auto;
+	      border-top-left-radius: 0.5rem;
+		}
+		.title_text{
+		position: absolute;
+			top: 0;
+			left: 0;	
+			width:95px;
+            height: 95px;
+            font-size: 1.4rem;
+            color: #FFF;
+            transform:rotate(-45deg);
+            padding: 0.2rem 1.5rem;
+            box-sizing: border-box;
+            text-align: center;
+		}
+		#triangle-topleft {
+
+}
+		.package_box .img_box {
+			display: inline-block;
+			width: 30%;
+			height: auto;
+			margin: 6% 1% 0 1%;
+		}
+		.package_box .img_box img {
+			width: 100%;
+			display: block;
+		}
+		.name{
+		width: 100%;
+		text-align: center;
+		display: inline-block;
+		font-size: 2.4rem;	
+		line-height: 2em;
+		color: #92918f;
+		}
+		.price {
+			color: #eb4311;
+		}
+		
+		.package_price {
+			width: 100%;
+			height: 5rem;
+			margin-top: 1rem;
+			border-top: 1px solid #cccccc;
+			padding-top: 1rem;
+		}
+		
+		.left {
+			width: 65%;
+			font-size: 1.8rem;
+			float: left;
+			height: 35px;
+			color: #eb4311;
+			margin-left: 5%;
+		}
+		
+		.right {
+			float: right;
+			width: 25%;
+			height: 35px;
+			line-height: 35px;
+			font-size: 3rem;
+			color: #FFFFFF;
+			background-color: #ea7224;
+			text-align: center;
+			border-radius: 4px;
+			margin-right: 10px;
+		}
+		
+		.right span {
+			font-size: 2.4rem;
+		}
+		
+		
+		
+		.popup {
+			z-index: 99;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(75, 68, 68, 0.7);
+			/*padding: 6.5rem 0;*/
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+		}
+		
+		.popup_box {
+			/*margin: 6.5rem 0;*/
+			max-height: 300px;
+			overflow: auto;
+			width: 93%;
+			margin: 0 auto;
+			background-color: #fff9e3;
+			border: 1px solid #000;
+			border-radius: 2rem;
+			position: relative;
+			overflow-y: scroll;
+		}
+		
+		.header_box {
+			margin-left: -1px;
+			/* box-sizing: border-box;*/
+			z-index: 2;
+			position: fixed;
+			width: 93%;
+			height: 5.4rem;
+			background-color: rgba(255, 249, 227, 1);
+			border: 1px solid #000;
+			border-radius: 2rem;
+			border-bottom: none;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+		
+		.popup_header {
+			width: 100%;
+			height: 5rem;
+			text-align: center;
+			line-height: 5rem;
+			position: relative;
+			background-color: #eeeeee;
+		}
+
+	
+		ul.list {
+			position: relative;
+			margin-top: 5rem;
+			max-height: 300px;
+			overflow-y: scroll;
+			
+		}
+ul.list::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+}
+ul.list::-webkit-scrollbar {
+  width: 15px;
+  height: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+ul.list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  min-height: 13px;
+}
+ul.list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+		li {
+			list-style: none;
+			border: 1px solid #9c7e76;
+			border-left: none;
+			border-right: none;
+			padding: 1.2rem;
+			margin: 0 0 -1px 0;
+		}
+		
+		.package_detail .right {
+			width: 76%;
+			height: 7rem;
+			line-height: 1.8em;
+		}
+		
+		.package_detail .right .product_title {
+			font-size: 2.8rem;
+			color: #000000;
+			font-weight: bold;
+		}
+		
+		.package_detail .right .welfare {
+			font-size: 2.8rem;
+			color: #eb4311;
+		}
+		
+		.package_detail .left {
+			width: 24%;
+			height: 7rem;
+			text-align: left;
+		}
+		
+		.package_detail .left img {
+			width: 74%;
+			height: 5rem;
+		}
+		
+		.characteristic {
+			color: #d6a45a;
+			font-size: 2.6rem;
+		}
+		
+		.btn {
+
+			margin: 1.25rem auto;
+			width: 100%;
+		}
+		
+		.btn a {
+						text-align: center;
+			width: 48%;
+			display: inline-block;
+			font-size: 20px;
+			text-decoration: none;
+		}
+		.cancel{
+			background-color: #dddddd;
+		}
+		.submit{
+			background-color: #ea7224;
+			color: #fff;
+		}
+		.text_through {
+			text-decoration: line-through;
+		}
+		.up{
+			position: absolute;
+			right: 10px;
+			top: 60px;
+			width: 30px;
+		   height: 30px;
+		}
+		.down{
+		   width: 30px;
+		   height: 30px;
+			position: absolute;
+			right: 10px;
+			bottom: 60px;
+		}
+		.up img,.down img{
+			width: 100%;
+			height: 100%;
+		}
+		.left_round{
+			z-index: 6;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			position: absolute;
+			top: 43px;
+			left: -12px;
+			background-color: rgba(75, 68, 68, 0.7);
+		}
+	</style>
+
+	<body>
+
+		<div class="box">
+			<div class="package_box">
+	  <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+	  <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+				
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共3件商品 福利价 <span style="color: #d5423a;">&yen;￥400</span> </p>
+							<span style="color: #ffb4a5;text-decoration: line-through;">非会员价：￥450 </span><span style="color: #ffb4a5;text-decoration: line-through;"> 会员价：￥450</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="package_box">
+	  <div class="title">
+	  </div> 
+	   <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+	  <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	  <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+				
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共3件商品 福利价￥400 </p>
+							<span style="color: #ffb4a5;text-decoration: line-through;">非会员价：￥450 </span><span style="color: #ffb4a5;text-decoration: line-through;"> 会员价：￥450</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="package_box">
+	 <div class="title">
+	  </div> 
+	   <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+	  <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	  <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+	   <div class="img_box">
+	  	<img src="img/pic.png" alt="" />
+				<p class="name">新年礼盒坚果</p>
+	  </div>
+				
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共3件商品 福利价￥400 </p>
+							<span style="color: #ffb4a5;text-decoration: line-through;">非会员价：￥450 </span><span style="color: #ffb4a5;text-decoration: line-through;"> 会员价：￥450</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">	
+			
+		
+			
+//			$.smartScroll = function(container, selectorScrollable) {
+//  // 如果没有滚动容器选择器，或者已经绑定了滚动时间，忽略
+//  if (!selectorScrollable || container.data('isBindScroll')) {
+//      return;
+//  }
+//
+//  // 是否是搓浏览器
+//  // 自己在这里添加判断和筛选
+//  var isSBBrowser;
+//
+//  var data = {
+//      posY: 0,
+//      maxscroll: 0
+//  };
+//
+//  // 事件处理
+//  container.on({
+//      touchstart: function (event) {
+//          var events = event.touches[0] || event;           
+//          // 先求得是不是滚动元素或者滚动元素的子元素
+//          var elTarget = $(event.target);
+//          
+//          if (!elTarget.length) {
+//              return;    
+//          }
+//          
+//          var elScroll;
+//          
+//          // 获取标记的滚动元素，自身或子元素皆可
+//          if (elTarget.is(selectorScrollable)) {
+//              elScroll = elTarget;
+//          } else if ((elScroll = elTarget.parents(selectorScrollable)).length == 0) {
+//              elScroll = null;
+//          }
+//          
+//          if (!elScroll) {
+//              return;
+//          }
+//          
+//          // 当前滚动元素标记
+//          data.elScroll = elScroll;
+//          
+//          // 垂直位置标记
+//          data.posY = events.pageY;
+//          data.scrollY = elScroll.scrollTop();
+//          // 是否可以滚动
+//          data.maxscroll = elScroll[0].scrollHeight - elScroll[0].clientHeight;
+//      },
+//      touchmove: function () {
+//          // 如果不足于滚动，则禁止触发整个窗体元素的滚动
+//          if (data.maxscroll <= 0 || isSBBrowser) {
+//              // 禁止滚动
+//              event.preventDefault();
+//          }
+//          // 滚动元素
+//          var elScroll = data.elScroll;
+//          // 当前的滚动高度
+//          var scrollTop = elScroll.scrollTop();
+//  
+//          // 现在移动的垂直位置，用来判断是往上移动还是往下
+//          var events = event.touches[0] || event;
+//          // 移动距离
+//          var distanceY = events.pageY - data.posY;
+//  
+//          if (isSBBrowser) {
+//              elScroll.scrollTop(data.scrollY - distanceY);
+//              elScroll.trigger('scroll');
+//              return;
+//          }
+//  
+//          // 上下边缘检测
+//          if (distanceY > 0 && scrollTop == 0) {
+//              // 往上滑，并且到头
+//              // 禁止滚动的默认行为
+//              event.preventDefault();
+//              return;
+//          }
+//  
+//          // 下边缘检测
+//          if (distanceY < 0 && (scrollTop + 1 >= data.maxscroll)) {
+//              // 往下滑，并且到头
+//              // 禁止滚动的默认行为
+//              event.preventDefault();
+//              return;
+//          }
+//      },
+//      touchend: function () {
+//          data.maxscroll = 0;
+//      }    
+//  });
+//
+//  // 防止多次重复绑定
+//  container.data('isBindScroll', true);
+//};
+//									
+			var scroll_top;
+			$(".close").click(function() {
+				$(".popup").hide();
+				$('html').removeClass('noscroll');
+				$("html").scrollTop(scroll_top);
+			});
+			$(".package_box").click(function() {
+				scroll_top=$(document).scrollTop();
+         $(".popup").css("height",$(window).height());
+                 $(".popup_box").css("margin-top",$(window).height()*0.1);
+                $(".popup_box").css("height",$(window).height()*0.8);
+                 $(".list").css("max-height",$(window).height()*0.6);
+                 $(".list").scrollTop(0);                  
+                 $("html").css("height",$(window).height());    
+                $("body").css("height",$(window).height());                    
+                $("body").css("top",0);                            
+//              $(".popup").show();
+				$(".popup").css("top",0);
+				$('html').addClass('noscroll');
+                $(".popup_box").scrollTop(0);               
+                $(document).ready(function() {
+                	$(".list").scroll(function() {
+                      var t = $(".list").scrollTop();
+                		var viewH =$(this).height();
+                        var contentH =$(this).get(0).scrollHeight;
+                		var Top= contentH - viewH;
+                		console.log(Top);
+                		console.log(t, Top,viewH, contentH);
+
+                		if(t == 0) {
+                			$(".down").fadeIn();
+                			$(".up").fadeOut();
+                		} else if((t/Top) >=0.95) { //恢复正常
+                            $(".down").fadeOut();
+                            $(".up").fadeIn();
+                		} else {
+                            $(".up").fadeIn();
+                            $(".down").fadeIn();
+                		}
+                	});
+                });
+                });
+                $(".detail").click(function(){
+            	$(".popup").toggle();
+                })
+		</script>
+	</body>
+
+</html>

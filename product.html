@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		 html {
+			font-size: 31.25%;
+		}
+		.noscroll,.noscroll body {
+    overflow: hidden;
+}
+.noscroll body {
+    position: relative;
+}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			margin: 0;
+			padding: 0;
+			background-image: url(/views/public/shop/img/bg.png);
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+		}
+		.box {
+			margin: 0 20px;
+		}
+
+		.package_box {
+			position: relative;
+			margin: 1rem auto;
+			padding:0rem 1rem;
+			border-radius: 0.5rem;
+			background-color: #fff4e7;
+		}
+    .title{
+			position: absolute;
+			top: 0;
+			left: 0;
+	      width: 27%;
+	      height: auto;
+	      border-top-left-radius: 0.5rem;
+		}
+
+		.title_text{
+		position: absolute;
+			top: 0;
+			left: 0;	
+			width:120px;
+            height: 120px;
+            font-size: 30px;
+            color: #FFF;
+            transform:rotate(-45deg);
+            padding:20px 5px 0 5px;
+            box-sizing: border-box;
+            text-align: center;
+           
+		}
+
+		.package_box .img_box {
+			display: inline-block;
+			width: 30%;
+			height: auto;
+			margin: 6% 1% 0 1%;
+		}
+		.package_box .img_box img {
+			width: 100%;
+			display: block;
+		}
+		.name{
+		width: 100%;
+		text-align: center;
+		display: inline-block;
+		font-size: 2.4rem;	
+		line-height: 2em;
+		color: #92918f;
+		 overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+		}
+		.price {
+			color: #eb4311;
+		}
+		
+		.package_price {
+			width: 100%;
+			height: 5rem;
+			margin-top: 1rem;
+			border-top: 1px solid #cccccc;
+			padding-top: 1rem;
+		}
+		
+		.package_box .left {
+			width: 65%;
+			font-size: 1.8rem;
+			float: left;
+			height: 35px;
+			color: #eb4311;
+			margin-left: 5%;
+		}
+		
+	.package_box .right {
+			float: right;
+			width: 30%;
+			height: 35px;
+			line-height: 35px;
+			font-size: 3rem;
+			color: #FFFFFF;
+			background-color: #ea7224;
+			text-align: center;
+			border-radius: 4px;
+		}
+		
+		.right span {
+			font-size: 2.4rem;
+		}
+		
+		.popup {
+			z-index: 99;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(75, 68, 68, 0.7);
+			padding:0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+			overflow:hidden;
+		}	
+		.popup_box {
+           overflow:hidden;
+			margin-left: 20px;
+			margin-right: 20px;
+			box-sizing: border-box;
+			margin-top:6.5rem;
+			background-color: #fff;
+			border-radius: 0.5rem;
+			position: relative;
+		}
+		.popup .right{
+		float:right;
+		width:68%;
+		}
+		
+		.popup .left{
+		float:left;
+		width:30%;
+		}
+		.header_box {
+			/* box-sizing: border-box;*/
+			margin-left: -1.5px;
+			z-index: 2;
+			width: 100%;
+			height: 45px;
+			border-radius: 0.5rem;
+			border-bottom: none;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+		
+		.popup_header {
+			width: 100%;
+			height: 45px;
+			text-align: center;
+			line-height: 45px;
+			position: relative;
+			background-color: #eeeeee;
+			color:#ea7224;
+			font-size:18px;
+			border-bottom: 1px dashed #cccccc;
+		}
+		
+		ul.list {
+			position: relative;
+			overflow-y: scroll;
+			overflow-y: auto;
+		}
+	
+ul.list::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0);
+  border-left: 1px solid rgba(0, 0, 0, 0);
+}
+ul.list::-webkit-scrollbar {
+  width: 5px;
+  height: 13px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+ul.list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  min-height: 28px;
+}
+ul.list::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+		li {
+			list-style: none;
+		    border-bottom: 5px solid #eeeeee;
+		    padding: 1.2rem 0.2em;
+		    margin: 0 1em -1px 1em;
+		    border-left: none;
+		    border-right: none;
+		}
+		.package_detail{
+		padding:20px auto;
+		}
+		.package_detail .right {
+		line-height:2.5em;
+		}
+		
+		.package_detail .right .product_title {
+			font-size: 3rem;
+			line-height:2em;
+			color: #666666;
+
+		}
+		
+		.package_detail .right .welfare {
+			font-size: 3rem;
+			line-height:2em;
+			color: #d5423a;
+		}
+		
+		.package_detail .left {
+			width: 24%;
+			text-align: left;
+		}
+		
+		.package_detail .left img {
+			width: 100%;
+			height: auto;
+		}
+		.btn {
+			text-align: center;
+			background-color: #dddddd;
+            width: 100%;
+            height:50px;
+		}
+				
+		.btn a {		
+		text-align: center;
+			width: 50%;
+			display: inline-block;
+			font-size: 20px;
+			text-decoration: none;
+			  height:50px;
+			  line-height:50px;
+			  float:left;
+		}
+		.cancel{
+			background-color: #dddddd;
+			color:#8f8f8f;
+		}
+		.submit{
+			background-color: #ea7224;
+			color: #fff;
+		}
+		
+		.text_through {
+			text-decoration: line-through;
+		    color: #bababa;
+		    font-size:2rem;
+		}
+			.up{
+			position: absolute;
+			right: 10px;
+			top: 60px;
+			width: 30px;
+		   height: 30px;
+		   display:none;
+		}
+		.down{
+		   width: 30px;
+		   height: 30px;
+			position: absolute;
+			right: 10px;
+			bottom: 60px;
+			 display:none;
+		}
+		.up img,.down img{
+			width: 100%;
+			height: 100%;
+		}
+		p{
+		font-size:1.2rem;
+		color:#888888;
+		}
+		
+		.left_round{
+			z-index: 6;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			position: absolute;
+			top: 37px;
+			left: -8px;
+			background-color: rgba(75, 68, 68, 0.7);
+		}
+			.right_round{
+			z-index: 6;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			position: absolute;
+			top: 37px;
+			right: -8px;
+			background-color: rgba(75, 68, 68, 0.7);
+		}
+	</style>
+	<body>
+		
+		<div class="popup" style="display: none;">
+    <div class="popup_box">
+       <div class="up"><img src="/views/public/shop/img/up.png"/></div>
+	   <div class="down"><img src="/views/public/shop/img/down.png"/></div>
+	   <div class="left_round"></div>
+	   <div class="right_round"></div>
+        <div class="header_box">
+            <div class="popup_header" id="package_name">
+               幸福安康套餐
+            </div>
+        </div>
+        		<ul class="list">
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left" style="background-color: #fff4e7;padding: 10px;">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+									<p>
+										<span>
+											产品特色:
+										</span>
+										<span >
+											1. 百年老树结果，一树一果 2. 健康无污染 3.超大头，每个超过5000g
+										</span>
+										</p>
+								</div>
+							</div>
+
+						</div>
+					</li>
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+								</div>
+							</div>
+							<div class="characteristic">
+								<p>产品特色:</p>
+								<ul>
+									<ol>1. 百年老树结果，一树一果</ol>
+									<ol>2. 健康无污染</ol>
+									<ol>3.超大头，每个超过5000g</ol>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+								</div>
+							</div>
+							<div class="characteristic">
+								<p>产品特色:</p>
+								<ul>
+									<ol>1. 百年老树结果，一树一果</ol>
+									<ol>2. 健康无污染</ol>
+									<ol>3.超大头，每个超过5000g</ol>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+								</div>
+							</div>
+							<div class="characteristic">
+								<p>产品特色:</p>
+								<ul>
+									<ol>1. 百年老树结果，一树一果</ol>
+									<ol>2. 健康无污染</ol>
+									<ol>3.超大头，每个超过5000g</ol>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+								</div>
+							</div>
+							<div class="characteristic">
+								<p>产品特色:</p>
+								<ul>
+									<ol>1. 百年老树结果，一树一果</ol>
+									<ol>2. 健康无污染</ol>
+									<ol>3.超大头，每个超过5000g</ol>
+								</ul>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="package_detail">
+							<div>
+								<div class="left">
+									<img src="img/pic.png" />
+								</div>
+								<div class="right">
+									<p class="product_title">佳沛 18头阳光金奇异果 3kg</p>
+									<p class="welfare"><strong>￥298.00 </strong> 工会福利价</p>
+									<p class="text_through">非会员价：￥400 会员价：￥360</p>
+								</div>
+							</div>
+							<div class="characteristic">
+								<p>产品特色:</p>
+								<ul>
+									<ol>1. 百年老树结果，一树一果</ol>
+									<ol>2. 健康无污染</ol>
+									<ol>3.超大头，每个超过5000g</ol>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div class="btn">
+					<a class="cancel" href="">取消</a>
+					<a class="submit" href="confirm.html">提交</a>
+				</div>
+        	</div>
+		</div>
+		
+		
+		<div class="box">
+		<div class="package_box"   >
+	  <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+			  <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+             <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+				 <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共2件商品 福利价 <span style="color: #d5423a;">&yen;400</span> </p>
+							<span style="color: #c9c6c4;text-decoration: line-through;">会员价：￥400  </span><span style="color: #c9c6c4;text-decoration: line-through;"> 非会员价：￥400</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+				<div class="package_box"   >
+	  <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+			  <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+               <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+			   <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+			   <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+				
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共2件商品 福利价 <span style="color: #d5423a;">&yen;400</span> </p>
+							<span style="color: #c9c6c4;text-decoration: line-through;">会员价：￥400  </span><span style="color: #c9c6c4;text-decoration: line-through;"> 非会员价：￥400</span>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="package_box"   >
+	  <img class="title" src="img/icon.png"/>
+	  <p class="title_text">幸福安康套餐</p>
+			  <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+			   <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+			   <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+			   <div class="img_box">
+					<img src="img/pic.png" alt="" />
+						<p class="name">新年礼盒坚果</p>
+			  </div>
+
+				
+				<div class="price">
+					<div class="package_price">
+						<div class="right detail">
+							查看详情
+						</div>
+						<div class="left">
+							<p style="font-size: 14px;">共2件商品 福利价 <span style="color: #d5423a;">&yen;400</span> </p>
+							<span style="color: #c9c6c4;text-decoration: line-through;">会员价：￥400  </span><span style="color: #c9c6c4;text-decoration: line-through;"> 非会员价：￥400</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+</div>
+	</body>
+</html>

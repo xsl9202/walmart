@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>订单确认</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="css/weui.min.css" />
+	<style type="text/css">
+		html {
+			font-size: 31.25%;
+		}
+		
+		input,
+		textarea {
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			-webkit-appearance: none;
+			outline: none;
+			border: none;
+		}
+		
+		input:focus,
+		textarea:focus {
+			outline: none;
+		}
+		
+		body {
+			background-image: url(img/bg.png);
+			width: 100%;
+			height: 100%;
+		}
+		
+		.box {
+			width: 92%;
+			margin: 0 auto;
+			box-sizing: border-box;
+		}
+		
+		.detail_list {
+			color: #fff;
+			font-size: 3.4rem;
+			padding-left: 0.5rem;
+			margin: 1.5rem 0 1.1rem 0;
+		}
+		
+		.title {
+			border-bottom: 1px solid #cccccc;
+		}
+		
+		.package,
+		.express_information {
+			width: 100%;
+			padding: 1.7rem 0;
+			background-color: #fff;
+			border-radius: 1rem;
+		}
+		
+		.package_detail {
+			margin-left: 1.5rem;
+			border-bottom: 1px solid #cccccc;
+			color: #584e45;
+		}
+		
+		.package_detail span {
+			position: absolute;
+			right: 20%;
+		}
+		
+		.package_detail p {
+			font-size: 2.8rem;
+			line-height: 2em;
+			color: #bababa;
+		}
+		
+		.package_detail .title {
+			font-size: 3rem;
+			color: #666666;
+			font-weight: bold;
+		}
+		
+		.total {
+			text-align: right;
+			margin-right: 3.5rem;
+			font-size: 2.6rem;
+			color: #bababa;
+			padding-top: 8px;
+		}
+		
+		.welfare_price {
+			font-size: 2.8rem;
+			color: #666666;
+		}
+		
+		.express_information {
+			width: 100%;
+			padding: 0.5rem;
+			border-radius: 1rem;
+			box-sizing: border-box;
+		}
+		
+		.min_box {
+			background-color: #fff;
+			height: auto;
+			width: 100%;
+			padding: 0;
+			border-radius: 0.8rem;
+			font-size: 2.8rem;
+			box-sizing: border-box;
+		}
+		
+		.min_box p {
+			text-indent: 1em;
+			border-bottom: 1px solid #7c7c7c;
+			height: 5rem;
+			line-height: 5rem;
+		}
+		
+		input {
+			border: none;
+			background-color: #fff;
+			margin: 0 auto;
+			width: 65%;
+			outline: none;
+			font-size: 2.6rem;
+		}
+		
+		.descripition {
+			margin-top: 1.5rem;
+			text-align: center;
+			font-size: 2.6rem;
+		}
+		
+		textarea {
+			outline: none;
+			border: none;
+			font-size: 2.8rem;
+			padding-left: 1em;
+		}
+		
+		textarea {
+			resize: none;
+			vertical-align: top;
+			line-height: 2em;
+			background-color: #fff;
+		}
+		
+		.btn {
+			text-align: center;
+			margin: 2.25rem 0 1.6rem 0;
+		}
+		
+		.btn a {
+			border-radius: 0.5rem;
+			text-decoration: none;
+			display: block;
+			width: 91%;
+			margin: 0 auto;
+			color: #fff;
+			font-size: 4.2rem;
+			background-color: #eea000;
+			height: 50px;
+			line-height: 50px;
+		}
+		
+		#toast {
+			z-index: 2;
+			background-color: #96979B;
+			color: #fff;
+			display: inline-block;
+			font-size: 3rem;
+			position: absolute;
+			top: 35rem;
+			left: 35%;
+			padding: 0.75rem 1.5rem;
+			border-radius: 3rem;
+			display: none;
+		}
+		
+		.nav {
+			background-image: url(/views/public/shop/img/select.png);
+			display: inline-block;
+			height: 14px;
+			width: 8.5px;
+			background-size: 100%;
+		}
+		
+		.price_number {
+			color: #d5423a;
+		}
+	</style>
+	<link rel="stylesheet" href="css/LArea.css">
+
+	<body>
+		<span id="toast">请输入正确的手机号码</span>
+		<div class="js_dialog" id="androidDialog1" style="display: none;">
+			<div class="weui-mask"></div>
+			<div class="weui-dialog weui-skin_android" style="background-color: rgba(0,0,0,0.7);">
+				<div class="weui-dialog__hd"><strong class="weui-dialog__title" style="color:#fff;">提示</strong></div>
+				<div class="weui-dialog__bd">
+					提交成功
+				</div>
+				<div class="weui-dialog__ft">
+					<a href="complate.html" class="weui-dialog__btn weui-dialog__btn_primary">确认</a>
+				</div>
+			</div>
+		</div>
+		<div class="box">
+			<div class="detail_list">
+				礼包商品清单
+			</div>
+			<div class="package">
+				<div class="package_detail">
+					<p class="title">Family套餐</p>
+					<p>佳沛 18头阳光金奇异果 3kg<span>10件</span></p>
+					<p>五仁月饼 186gX4 <span>10件</span></p>
+					<p>佳沛 18头阳光金奇异果 3kg <span>10件</span></p>
+				</div>
+				<div class="total">
+					<p class="welfare_price">
+						工会福利价：<span class="price_number">&yen;400</span>
+					</p>
+					<p>
+						商品价值：XXX元
+					</p>
+				</div>
+			</div>
+			<div class="detail_list">
+				礼包快递信息 收集
+			</div>
+			<div class="express_information">
+				<div class="min_box">
+
+					<p><input type="text" id="name" placeholder="请填写收件人姓名" /></p>
+					<p><input type="tel" name="" id="tel" maxlength="11" placeholder="请填写收件人手机号" required onblur="checkme()" value="" /></p>
+					<p>
+						<input id="demo1" type="text" readonly="" placeholder="省市区" value="" />
+						<input id="value1" type="hidden" value="" />
+						<span class="nav"></span>
+					</p>
+					<div>
+						<textarea id="city_detail" name="" rows="4" cols="35" placeholder="详细地址"></textarea></div>
+				</div>
+			</div>
+			<div class="descripition">
+				*因包含生鲜商品，配送地址仅限深圳，北京和上海部分地区
+			</div>
+			<div class="btn">
+				<a id="btn" href="complate.html">提交</a>
+			</div>
+		</div>
+	</body>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="js/LAreaData1.js"></script>
+	<script src="js/LAreaData2.js"></script>
+	<script src="js/LArea.js"></script>
+	<script>
+		$('#text').on('keyup', function() {
+			if($(this).prop('comStart')) return; // 中文输入过程中不截断
+			var value = $(this).val();
+			console.log('当前输入：' + value);
+			if(Str.byteLen(value, 3) > 12) {
+				$(this).val(Str.getMaxlen(value, 12));
+			}
+		}).on('compositionstart', function() {
+			$(this).prop('comStart', true);
+			console.log('中文输入：开始');
+		}).on('compositionend', function() {
+			$(this).prop('comStart', false);
+			console.log('中文输入：结束');
+		});
+		//		$('#name').on('input', function() {
+		//  if($(this).prop('comStart')) return;    // 中文输入过程中不截断
+		//
+		//  var value = $(this).val();
+		//  console.log('当前输入：'+value);
+		//  if(Str.byteLen(value, 3)>6){
+		//      $(this).val(Str.getMaxlen(value, 6));
+		//  }
+		//}).on('compositionstart', function(){
+		//  $(this).prop('comStart', true);
+		//  console.log('中文输入：开始');
+		//}).on('compositionend', function(){
+		//  $(this).prop('comStart', false);
+		//  console.log('中文输入：结束');
+		//});
+
+		$("#name").keyup(function() {
+			$("#name").attr("maxlength", 30);
+			//这就是输入值的个数
+			var length = this.value.length;
+			str = ($("#name").val().replace(/\d/g, "")).length;
+			console.log(str);
+			if(str >= 6) {
+				Prompt();
+				$("#name").attr("maxlength", 6);
+			}
+		});
+		//	$("#name").change(function() {
+		//	//这就是输入值的个数
+		//	var length = this.value.length;
+		//	
+		//		if(length >6){
+		//		Prompt();
+		//		this.value=this.value.substr(0, 6);
+		//	}
+		//});
+
+		　　
+		function chkstrlen(str)　　 {　　　　 var strlen = 0;　　　　 for(var i = 0; i < str.length; i++)　　　　 {　　　　　　 if(str.charCodeAt(i) > 255) //如果是汉字，则字符串长度加2
+					　　　　　　　　 strlen += 2;　　　　　　
+				else　　　　　　　　 strlen++;　　　　 }　　　　 return strlen;　　 }
+
+		function check() {
+			//var length = $("#name").val().length;
+			str = ($("#name").val().replace(/\w/g, "")).length;
+			if(str > 6) {
+				$("#name").attr("maxlength", 6);
+				//$("#name").val($("#name").val().substr(0, 6));
+				Prompt();
+			}
+		};
+
+		function Prompt() {
+			$("#toast").css("top", $(document).scrollTop() * 0.8 + $(window).height() * 0.5)
+			$("#toast").html("只能输入6位有效文字");
+			$("#toast").fadeIn();
+			setTimeout(function() {
+				$("#toast").fadeOut();
+			}, 2000)
+		}
+
+		function popup() {
+			$("#toast").html("请输入正确手机号");
+			$("#toast").css("top", $(document).scrollTop() * 0.8 + $(window).height() * 0.5)
+			$("#toast").fadeIn();
+			setTimeout(function() {
+				$("#toast").fadeOut();
+			}, 1500)
+		}
+		//弹窗
+		function tancuan() {
+			//$(".weui-dialog__bd").html("失败");
+			$('#androidDialog1').fadeIn(200);
+			$('.weui-dialog__btn').on('click', function(event) {
+				$(this).parents('.js_dialog').fadeOut(200);
+				//event.preventDefault();
+			});
+		}
+		//验证手机号
+		function checkme() {
+			var val = $("#tel").val();
+			var mobilevalid = /^(0|86|17951)?(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/;
+			if(!mobilevalid.test(val)) {
+				popup();
+				return false;
+			}
+		}
+		//获取省市区
+		$("#btn").click(function(event) {
+			//tancuan();
+			event.preventDefault();
+			var name = $("#name").val();
+			var tel = $("#tel").val();
+			var city = document.getElementById("demo1").value;
+			var city_detail = $("#city_detail").val();
+			console.log(name + tel + city + city_detail)
+			//alert(city);	
+		});
+
+		//选择省市区
+		var area1 = new LArea();
+		area1.init({
+			'trigger': '#demo1', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+			'valueTo': '#value1', //选择完毕后id属性输出到该位置
+			'keys': {
+				id: 'id',
+				name: 'name'
+			}, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+			'type': 1, //数据源类型
+			'data': LAreaData //数据源
+		});
+		area1.value = [1, 13, 3]; //控制初始位置，注意：该方法并不会影响到input的value
+		var area2 = new LArea();
+		area2.init({
+			'trigger': '#demo2',
+			'valueTo': '#value2',
+			'keys': {
+				id: 'value',
+				name: 'text'
+			},
+			'type': 2,
+			'data': [provs_data, citys_data, dists_data]
+		});
+	</script>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title>登录</title>
+	</head>
+	<style type="text/css">
+		html {
+			font-size: 31.25%;
+		}		
+		body {
+			margin: 0;
+			padding: 0;
+			background-image: url(img/bg.png);
+			width: 100%;
+			height: 100%;
+		}		
+		.box {
+			width: 86%;
+			margin: 0 auto;
+			
+		}
+		
+		.logo {
+			width: 100%;
+			height: auto;
+			margin-bottom: 20px;
+			text-align: center;
+		}
+		
+		.logo img {
+			width: 100%;
+			height: auto;
+		}		
+		.descripition {
+			color: #fff;
+			font-size: 2.8rem;
+			padding: 17px;
+			line-height: 1.5em;
+			border: 2px dashed #FFFFFF;
+			border-radius: 0.8rem;
+		}
+		
+		.contact {
+			color: #fff;
+			font-size: 2.6rem;
+			margin-top: 1.2rem;
+			padding: 0 3rem;
+			line-height: 1.5em;
+		}
+		
+		.content_box {
+			margin: 1.4rem auto;
+			width: 91%;
+			height: 47px;
+			line-height: 47px;
+			background-color: #fff9e3;
+			border: 2px solid #000;
+			border-radius: 1rem;
+			vertical-align: middle;
+		}
+		
+		.user_box span,.pc_box span{
+  color: #ff6158;
+  font-size: 2.8rem;
+  display: inline-block;
+  width: 85px;
+  text-align: center;
+		}
+		
+		
+		input {
+			border: none;
+			background-color: #fff9e3;
+			height: 40px;
+			line-height:40px;
+			display: inline-block;
+			margin: 0 auto;
+			border-left: 1px solid #908d81;
+			text-indent: 1em;
+			width: 60%;
+			outline: none;
+		}
+		
+		.prompt {
+			color: #fff;
+			text-align: center;
+			font-size: 2.8rem;
+		}		
+		.btn {
+			text-align: center;
+			margin-top: 2.25rem;
+		}
+		.btn img{
+			width: 40%;
+		}
+		#toast{
+			z-index: 1;
+			background-color: #96979B;
+			color: #fff;
+			font-size: 3rem;
+			height: 3rem;
+			max-width: 108px;
+			line-height: 3rem;
+			padding: 0 1rem;
+			margin: auto;
+			position: fixed;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			border-radius:3rem ;
+			display: none;
+			text-align: center;
+		}
+	</style>
+	<body>
+		<span id="toast">员工工号为空</span>
+		<div class="logo">
+				<img src="img/logo1.png" />
+			</div>
+		<div class="box">
+			
+			<div class="descripition">
+				活动说明：我是活动说明哦我是活动说明哦我是 说明哦我是活动说明哦我是活动说明哦我是活动 说明哦我是活动说明哦我是活动说明。
+			</div>
+			<div class="contact">
+				如有疑问，&nbsp; 请联系：&nbsp;Rian Liu,&nbsp;&nbsp;分机XXX，
+				<br /> 邮箱XX@walmart.com
+			</div>
+			<div class="content_box">
+				<div class="user_box">
+				<span>outlook ID</span>	<input type="" name="" id="user" placeholder="请输入6位员工工号" value="" />
+				</div>
+			</div>
+			<div class="content_box">
+				<div class="pc_box">
+				<span>员工工号</span>	<input type="" name="" id="id_code" placeholder="请输入电脑登录ID（如：A0A00BC）" value="" />
+				</div>
+			</div>
+			<div class="prompt">请输入正确的电脑登录ID</div>
+			<div class="btn">
+				<a href="package.html"><img src="img/submit.png" /></a>
+			</div>
+		</div>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			function popup(){
+				$("#toast").fadeIn();
+				setTimeout(function(){
+					$("#toast").fadeOut();
+				},1500)
+			}
+//			$(".btn").click(function(event) {
+//				//$("#toast").fadeIn();
+//				popup();
+//			event.preventDefault();
+//				var user = $("#user").val();
+//				var id_code = $("#id_code").val();
+////				$.ajax({
+////					type: "POST", //提交方式 
+////					url: "${pageContext.request.contextPath}/org/doDelete.action", //路径 
+////					data: {
+////						"org.id": "${org.id}"
+////					}, //数据，这里使用的是Json格式进行传输 
+////					success: function(result) { //返回数据根据结果进行相应的处理 
+////						if(result.success) {
+////							$("#tipMsg").text("删除数据成功");
+////							tree.deleteItem("${org.id}", true);
+////						} else {
+////							$("#tipMsg").text("删除数据失败");
+////						}
+////					}
+////				});
+//			})
+		</script>
+	</body>
+
+</html>
